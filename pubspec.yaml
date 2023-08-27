@@ -14,7 +14,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   go_router: ^10.1.0
+  http: ^1.1.0
   intl: ^0.18.0
+  logger: ^2.0.1
 
 dev_dependencies:
   bloc_test: ^9.1.2
