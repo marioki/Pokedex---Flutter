@@ -1,6 +1,9 @@
 part of 'pokemon_list_bloc.dart';
 
-@immutable
-sealed class PokemonListState {}
+enum PokemonListStatus { initial, loading, loaded, error }
 
-final class PokemonListInitial extends PokemonListState {}
+final class PokemonListState {
+  final List<PokemonData>? pokemonDataList;
+  final PokemonListStatus;
+  PokemonListState({required this.PokemonListStatus, this.pokemonDataList});
+}
