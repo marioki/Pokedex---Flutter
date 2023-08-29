@@ -40,7 +40,7 @@ class PokemonListPage extends StatelessWidget {
               },
               onFetchData: () {
                 logger.d('On fetch data called');
-                context.read<PokemonListBloc>().add(GetPokemonListEvent());
+                //context.read<PokemonListBloc>().add(GetPokemonListEvent());
               },
             );
           }
