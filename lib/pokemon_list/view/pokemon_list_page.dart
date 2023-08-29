@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/logger.dart';
 import 'package:pokedex/pokemon_list/bloc/pokemon_list_bloc.dart';
 import 'package:pokedex/pokemon_list/view/pokemon_list_item_widget.dart';
+import 'package:very_good_infinite_list/very_good_infinite_list.dart';
 
 import '../../models/pokemon_data_response.dart';
-import 'type_chip_widget.dart';
 
 class PokemonListPage extends StatelessWidget {
   const PokemonListPage({super.key});
@@ -29,7 +29,7 @@ class PokemonListPage extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
           if (state.PokemonListStatus == PokemonListStatus.loaded) {
-            return ListView.builder(
+            return InfiniteList(
               padding: EdgeInsets.all(16),
               itemCount: state.pokemonDataList!.length,
               itemBuilder: (context, index) {
@@ -37,6 +37,10 @@ class PokemonListPage extends StatelessWidget {
                 return PokemonListItemWidget(
                   pokemon: pokemonItem,
                 );
+              },
+              onFetchData: () {
+                logger.d('On fetch data called');
+                context.read<PokemonListBloc>().add(GetPokemonListEvent());
               },
             );
           }
