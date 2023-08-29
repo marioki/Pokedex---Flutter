@@ -17,6 +17,7 @@ dependencies:
   http: ^1.1.0
   intl: ^0.18.0
   logger: ^2.0.1
+  very_good_infinite_list: ^0.7.0
 
 dev_dependencies:
   bloc_test: ^9.1.2
