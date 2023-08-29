@@ -25,7 +25,7 @@ class PokemonData {
   final Species? species;
   final Sprites? sprites;
   final List<Stat>? stats;
-  final List<Type>? types;
+  final List<PokemonType>? pokemonTypes;
   final int? weight;
 
   PokemonData({
@@ -45,7 +45,7 @@ class PokemonData {
     this.species,
     this.sprites,
     this.stats,
-    this.types,
+    this.pokemonTypes,
     this.weight,
   });
 
@@ -66,7 +66,7 @@ class PokemonData {
     Species? species,
     Sprites? sprites,
     List<Stat>? stats,
-    List<Type>? types,
+    List<PokemonType>? types,
     int? weight,
   }) =>
       PokemonData(
@@ -86,7 +86,7 @@ class PokemonData {
         species: species ?? this.species,
         sprites: sprites ?? this.sprites,
         stats: stats ?? this.stats,
-        types: types ?? this.types,
+        pokemonTypes: types ?? this.pokemonTypes,
         weight: weight ?? this.weight,
       );
 
@@ -119,9 +119,9 @@ class PokemonData {
         stats: json["stats"] == null
             ? []
             : List<Stat>.from(json["stats"]!.map((x) => Stat.fromJson(x))),
-        types: json["types"] == null
+        pokemonTypes: json["types"] == null
             ? []
-            : List<Type>.from(json["types"]!.map((x) => Type.fromJson(x))),
+            : List<PokemonType>.from(json["types"]!.map((x) => PokemonType.fromJson(x))),
         weight: json["weight"],
       );
 
@@ -142,7 +142,8 @@ class PokemonData {
         "species": species?.toJson(),
         "sprites": sprites?.toJson(),
         "stats": stats == null ? [] : List<dynamic>.from(stats!.map((x) => x.toJson())),
-        "types": types == null ? [] : List<dynamic>.from(types!.map((x) => x.toJson())),
+        "types":
+            pokemonTypes == null ? [] : List<dynamic>.from(pokemonTypes!.map((x) => x.toJson())),
         "weight": weight,
       };
 }
@@ -991,31 +992,31 @@ class Stat {
       };
 }
 
-class Type {
+class PokemonType {
   final int? slot;
-  final Species? type;
+  final Species? species;
 
-  Type({
+  PokemonType({
     this.slot,
-    this.type,
+    this.species,
   });
 
-  Type copyWith({
+  PokemonType copyWith({
     int? slot,
-    Species? type,
+    Species? species,
   }) =>
-      Type(
+      PokemonType(
         slot: slot ?? this.slot,
-        type: type ?? this.type,
+        species: species ?? this.species,
       );
 
-  factory Type.fromJson(Map<String, dynamic> json) => Type(
+  factory PokemonType.fromJson(Map<String, dynamic> json) => PokemonType(
         slot: json["slot"],
-        type: json["type"] == null ? null : Species.fromJson(json["type"]),
+        species: json["type"] == null ? null : Species.fromJson(json["type"]),
       );
 
   Map<String, dynamic> toJson() => {
         "slot": slot,
-        "type": type?.toJson(),
+        "type": species?.toJson(),
       };
 }

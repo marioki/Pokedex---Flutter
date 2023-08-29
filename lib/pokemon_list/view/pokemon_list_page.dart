@@ -5,6 +5,7 @@ import 'package:pokedex/models/pokemon_list_response.dart';
 import 'package:pokedex/pokemon_list/bloc/pokemon_list_bloc.dart';
 
 import '../../models/pokemon_data_response.dart';
+import 'type_chip_widget.dart';
 
 class PokemonListPage extends StatelessWidget {
   const PokemonListPage({super.key});
@@ -29,15 +30,32 @@ class PokemonListPage extends StatelessWidget {
           }
           if (state.PokemonListStatus == PokemonListStatus.loaded) {
             return ListView.builder(
+              padding: EdgeInsets.all(16),
               itemCount: state.pokemonDataList!.length,
               itemBuilder: (context, index) {
                 PokemonData pokemonItem = state.pokemonDataList![index];
-                return ListTile(
-                  leading: Image.network(
-                    pokemonItem.sprites!.frontDefault!,
-                    fit: BoxFit.cover,
-                  ),
-                  title: Text(pokemonItem.name!),
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('#${pokemonItem.id.toString()}'),
+                    Image(
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.contain,
+                      image: NetworkImage(
+                        pokemonItem.sprites!.frontDefault!,
+                      ),
+                    ),
+                    Text(pokemonItem.name!),
+                    Spacer(),
+                    Row(
+                      children: pokemonItem.pokemonTypes!
+                          .map((e) => TypeChipWidget(
+                                pokemonType: e,
+                              ))
+                          .toList(),
+                    )
+                  ],
                 );
               },
             );

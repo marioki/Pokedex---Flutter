@@ -17,7 +17,7 @@ class PokeApiClient {
         scheme: pokeApiUri.scheme,
         host: pokeApiUri.host,
         path: '/api/v2/pokemon',
-        query: 'limit=100&offset=0',
+        query: 'limit=10&offset=0',
       );
       final response = await _client.get(uri);
       return response;
