@@ -21,7 +21,8 @@ class PokemonListPage extends StatelessWidget {
       body: InfiniteList(
         padding: EdgeInsets.all(16),
         itemCount: state.pokemonDataList.length,
-        hasError: false,
+        hasReachedMax: state.pokemonDataList.length == 1281,
+        hasError: state.pokemonListStatus == PokemonListStatus.error,
         isLoading: state.pokemonListStatus == PokemonListStatus.loading,
         loadingBuilder: (context) {
           return Center(

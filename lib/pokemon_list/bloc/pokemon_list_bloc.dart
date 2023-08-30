@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:pokedex/models/pokemon_data_response.dart';
 import 'package:pokedex/repositories/pokemon_repository.dart';
@@ -11,7 +12,7 @@ import '../../logger.dart';
 part 'pokemon_list_event.dart';
 part 'pokemon_list_state.dart';
 
-class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
+class PokemonListBloc extends HydratedBloc<PokemonListEvent, PokemonListState> {
   final PokemonRepository _pokemonRepository = PokemonRepository();
   PokemonListBloc() : super(PokemonListState(pokemonListStatus: PokemonListStatus.initial)) {
     on<GetPokemonListEvent>(_OnGetPokemonListEvent);
@@ -36,5 +37,15 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
       logger.e(stackTrace);
       emit(PokemonListState(pokemonListStatus: PokemonListStatus.error));
     }
+  }
+
+  @override
+  PokemonListState? fromJson(Map<String, dynamic> json) {
+    return PokemonListState.fromJson(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(PokemonListState state) {
+    return state.toJson();
   }
 }
