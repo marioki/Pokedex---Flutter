@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/logger.dart';
 import 'package:pokedex/pokemon_list/bloc/pokemon_list_bloc.dart';

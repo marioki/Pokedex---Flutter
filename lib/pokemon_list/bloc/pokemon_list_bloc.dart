@@ -12,7 +12,7 @@ import '../../logger.dart';
 part 'pokemon_list_event.dart';
 part 'pokemon_list_state.dart';
 
-class PokemonListBloc extends HydratedBloc<PokemonListEvent, PokemonListState> {
+class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
   final PokemonRepository _pokemonRepository = PokemonRepository();
   PokemonListBloc() : super(PokemonListState(pokemonListStatus: PokemonListStatus.initial)) {
     on<GetPokemonListEvent>(_OnGetPokemonListEvent);
@@ -39,13 +39,13 @@ class PokemonListBloc extends HydratedBloc<PokemonListEvent, PokemonListState> {
     }
   }
 
-  @override
-  PokemonListState? fromJson(Map<String, dynamic> json) {
-    return PokemonListState.fromJson(json);
-  }
+  // @override
+  // PokemonListState? fromJson(Map<String, dynamic> json) {
+  //   return PokemonListState.fromJson(json);
+  // }
 
-  @override
-  Map<String, dynamic>? toJson(PokemonListState state) {
-    return state.toJson();
-  }
+  // @override
+  // Map<String, dynamic>? toJson(PokemonListState state) {
+  //   return state.toJson();
+  // }
 }

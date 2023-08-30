@@ -1,6 +1,6 @@
 import 'package:pokedex/app/app.dart';
 import 'package:pokedex/bootstrap.dart';
 
-void main() {
+Future<void> main() async {
   bootstrap(() => const App());
 }
