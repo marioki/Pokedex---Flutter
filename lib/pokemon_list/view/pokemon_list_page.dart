@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/logger.dart';
 import 'package:pokedex/pokemon_list/bloc/pokemon_list_bloc.dart';
@@ -12,44 +13,32 @@ class PokemonListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<PokemonListBloc>().state;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pokemon'),
-        actions: [
-          IconButton(
-            onPressed: () => context.read<PokemonListBloc>().add(GetPokemonListEvent()),
-            icon: Icon(Icons.refresh),
-          )
-        ],
       ),
-      body: BlocBuilder<PokemonListBloc, PokemonListState>(
-        builder: (context, state) {
-          logger.d('Current State on builder: ${state.PokemonListStatus}');
-          if (state.PokemonListStatus == PokemonListStatus.loading) {
-            return Center(child: CircularProgressIndicator());
-          }
-          if (state.PokemonListStatus == PokemonListStatus.loaded) {
-            return InfiniteList(
-              padding: EdgeInsets.all(16),
-              itemCount: state.pokemonDataList!.length,
-              itemBuilder: (context, index) {
-                PokemonData pokemonItem = state.pokemonDataList![index];
-                return PokemonListItemWidget(
-                  pokemon: pokemonItem,
-                );
-              },
-              onFetchData: () {
-                logger.d('On fetch data called');
-                //context.read<PokemonListBloc>().add(GetPokemonListEvent());
-              },
-            );
-          }
-          if (state.PokemonListStatus == PokemonListStatus.error) {
-            return Center(child: Text('Error loading data'));
-          }
+      body: InfiniteList(
+        padding: EdgeInsets.all(16),
+        itemCount: state.pokemonDataList.length,
+        hasError: false,
+        isLoading: state.pokemonListStatus == PokemonListStatus.loading,
+        loadingBuilder: (context) {
           return Center(
-            child: Text('Initial State'),
+            child: CircularProgressIndicator(),
           );
+        },
+        itemBuilder: (context, index) {
+          PokemonData pokemonItem = state.pokemonDataList[index];
+          return PokemonListItemWidget(
+            pokemon: pokemonItem,
+          );
+        },
+        onFetchData: () {
+          logger.d('On fetch data called');
+          context
+              .read<PokemonListBloc>()
+              .add(GetPokemonListEvent(10, state.pokemonDataList.length));
         },
       ),
     );

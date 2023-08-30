@@ -6,9 +6,9 @@ import '../models/pokemon_list_response.dart';
 class PokemonRepository {
   final PokeApiClient _pokeApiClient = PokeApiClient();
 
-  Future<List<PokemonData>> getPokemonList() async {
+  Future<List<PokemonData>> getPokemonList(int limit, int offset) async {
     List<PokemonData> pokemonDataList = [];
-    var response = await _pokeApiClient.getPokemonList();
+    var response = await _pokeApiClient.getPokemonList(limit, offset);
     final pokemonList = pokemonListFromJson(response.body);
 
     for (var element in pokemonList.results!) {
@@ -17,8 +17,6 @@ class PokemonRepository {
       final pokemonData = pokemonDataFromJson(response.body);
       pokemonDataList.add(pokemonData);
     }
-
-    logger.d(pokemonDataList.length.toString());
     return pokemonDataList;
   }
 }

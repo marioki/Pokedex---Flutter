@@ -9,13 +9,13 @@ class PokeApiClient {
     host: 'pokeapi.co',
   );
 
-  Future<http.Response> getPokemonList() async {
+  Future<http.Response> getPokemonList(int limit, int offset) async {
     try {
       final uri = Uri(
         scheme: pokeApiUri.scheme,
         host: pokeApiUri.host,
         path: '/api/v2/pokemon',
-        query: 'limit=10&offset=0',
+        query: 'limit=$limit&offset=$offset',
       );
       final response = await _client.get(uri);
       return response;

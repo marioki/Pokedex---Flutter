@@ -1,4 +1,3 @@
-import 'package:logger/logger.dart';
 import 'package:pokedex/app/app.dart';
 import 'package:pokedex/bootstrap.dart';
 
