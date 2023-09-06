@@ -9,28 +9,31 @@ class PokemonListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text('#${pokemon.id.toString()}'),
-        Image(
-          width: 100,
-          height: 100,
-          fit: BoxFit.contain,
-          image: NetworkImage(
-            pokemon.sprites!.frontDefault!,
+    return GestureDetector(
+      onTap: () {},
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text('#${pokemon.id.toString()}'),
+          Image(
+            width: 100,
+            height: 100,
+            fit: BoxFit.contain,
+            image: NetworkImage(
+              pokemon.sprites!.frontDefault!,
+            ),
           ),
-        ),
-        Text(pokemon.name!),
-        Spacer(),
-        Row(
-          children: pokemon.pokemonTypes!
-              .map((e) => TypeChipWidget(
-                    pokemonType: e,
-                  ))
-              .toList(),
-        )
-      ],
+          Text(pokemon.name!),
+          Spacer(),
+          Row(
+            children: pokemon.pokemonTypes!
+                .map((e) => TypeChipWidget(
+                      pokemonType: e,
+                    ))
+                .toList(),
+          )
+        ],
+      ),
     );
   }
 }
