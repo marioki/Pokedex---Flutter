@@ -1,10 +1,15 @@
 part of 'pokemon_details_bloc.dart';
 
-sealed class PokemonDetailsState extends Equatable {
-  const PokemonDetailsState();
-  
-  @override
-  List<Object> get props => [];
-}
+enum PokemonDetailsStatus { initial, loading, loaded, error }
 
-final class PokemonDetailsInitial extends PokemonDetailsState {}
+class PokemonDetailsState extends Equatable {
+  final PokemonDetailsStatus pokemonDetailsStatus;
+  final PokemonData? pokemonDetails;
+  const PokemonDetailsState({
+    required this.pokemonDetailsStatus,
+    this.pokemonDetails,
+  });
+
+  @override
+  List<Object?> get props => [pokemonDetailsStatus, pokemonDetails];
+}
