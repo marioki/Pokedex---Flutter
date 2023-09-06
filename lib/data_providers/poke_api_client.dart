@@ -37,4 +37,20 @@ class PokeApiClient {
       rethrow;
     }
   }
+
+  Future<http.Response> getPokemonDataFromId(int id) async {
+    try {
+      final uri = Uri(
+        scheme: pokeApiUri.scheme,
+        host: pokeApiUri.host,
+        path: '/api/v2/pokemon/$id',
+      );
+      final response = await _client.get(uri);
+      return response;
+    } catch (error, stackTrace) {
+      logger.e(error);
+      logger.e(stackTrace);
+      rethrow;
+    }
+  }
 }
