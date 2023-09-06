@@ -7,6 +7,7 @@ import 'package:pokedex/pokemon_list/view/pokemon_list_page.dart';
 
 // GoRouter configuration
 final router = GoRouter(
+  debugLogDiagnostics: true,
   routes: [
     GoRoute(
         path: '/',
@@ -20,7 +21,8 @@ final router = GoRouter(
         },
         routes: [
           GoRoute(
-            path: 'pokemon/id:',
+            path: 'pokemon/:id',
+            name: 'pokemonDetails',
             builder: (context, state) {
               int? pokemonId = int.tryParse(state.pathParameters["id"] ?? '');
               return PokemonDetailsPage(pokemonId: pokemonId);

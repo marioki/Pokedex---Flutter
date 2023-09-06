@@ -6,6 +6,8 @@ class PokemonDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(child: Text(pokemonId.toString())),
+    );
   }
 }
