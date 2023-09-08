@@ -34,11 +34,20 @@ class PokemonDetailsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.network(
-                      state.pokemonDetails!.sprites!.frontDefault!,
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.cover,
+                    Container(
+                      width: 300,
+                      height: 350,
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 166, 232, 255),
+                          border: Border.all(color: Colors.black, width: 4),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black, offset: Offset(4, 4)),
+                          ]),
+                      child: Image.network(
+                        state.pokemonDetails!.sprites!.frontDefault!,
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
                     PokemonTypeChipList(
                       types: pokemonData.pokemonTypes,
@@ -59,6 +68,37 @@ class PokemonDetailsPage extends StatelessWidget {
                           ],
                         ),
                       ],
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 166, 232, 255),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide: BorderSide(color: Colors.black, width: 4),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide: BorderSide(color: Colors.black, width: 4),
+                        ),
+                        hintText: 'Your Hint Text',
+                        contentPadding: EdgeInsets.all(16), // Adjust this for internal padding
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // your button action here
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 166, 232, 255), // button color
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          side: BorderSide(color: Colors.black, width: 4), // border width and color
+                        ),
+                        elevation: 4, // elevation
+                        shadowColor: Colors.black, // shadow color
+                      ),
+                      child: Text('Your Button Text'),
                     )
                   ],
                 ),
