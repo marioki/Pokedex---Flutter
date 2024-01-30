@@ -1,11 +1,9 @@
-import 'dart:math' as math;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/models/pokemon_data_response.dart';
 import 'package:pokedex/pokemon_details/bloc/pokemon_details_bloc.dart';
-import 'package:pokedex/pokemon_list/view/pokemon_list_item_widget.dart';
 import 'package:pokedex/pokemon_list/view/pokemon_type_chip_list.dart';
 
 class PokemonDetailsPage extends StatelessWidget {
